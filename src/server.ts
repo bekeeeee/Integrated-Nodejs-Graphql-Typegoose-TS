@@ -12,6 +12,8 @@ import { redis } from "./redis";
 // resolvers
 import { RegisterResolver } from "./modules/User/Register";
 import { LoginResolver } from "./modules/User/Login";
+import { LogoutResolver } from "./modules/User/Logout";
+
 import { ConfirmResolver } from "./modules/User/Confirm";
 import { ForgotPasswordResolver } from "./modules/user/ForgotPassword";
 import { ChangePasswordResolver } from "./modules/user/ChangePassword";
@@ -28,6 +30,7 @@ const main = async () => {
       ConfirmResolver,
       ForgotPasswordResolver,
       ChangePasswordResolver,
+      LogoutResolver
     ],
     emitSchemaFile: true,
     validate: false,
@@ -47,7 +50,7 @@ const main = async () => {
 
   const server = new ApolloServer({
     schema,
-    context: ({ req }: any) => ({ req }),
+    context: ({ req,res }: any) => ({ req ,res}),
   });
 
   const app = Express();

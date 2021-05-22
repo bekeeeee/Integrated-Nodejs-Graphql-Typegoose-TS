@@ -16,6 +16,7 @@ input LoginInput {
 type Mutation {
   register(data: RegisterInput!): User!
   Login(data: LoginInput!): User
+  logout: Boolean!
   ConfirmUser(token: String!): Boolean!
   forgotPassword(email: String!): Boolean!
   ChangePassword(data: ChangePasswordInput!): User
