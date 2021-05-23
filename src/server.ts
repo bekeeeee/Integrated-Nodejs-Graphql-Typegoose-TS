@@ -4,49 +4,32 @@ import session from "express-session";
 import connectRedis from "connect-redis";
 import cors from "cors";
 import "reflect-metadata";
-import { buildSchema } from "type-graphql";
 import { connect } from "mongoose";
 
 import { redis } from "./redis";
+import { createSchema } from "./utils/createSchema";
 // import { sendEmail } from "./utils/sendEmail";
-// resolvers
-import { RegisterResolver } from "./modules/User/Register";
-import { LoginResolver } from "./modules/User/Login";
-import { LogoutResolver } from "./modules/User/Logout";
 
-import { ConfirmResolver } from "./modules/User/Confirm";
-import { ForgotPasswordResolver } from "./modules/user/ForgotPassword";
-import { ChangePasswordResolver } from "./modules/user/ChangePassword";
-
-import { MeResolver } from "./modules/User/Me";
 
 const RedisStore = connectRedis(session);
 const main = async () => {
-  const schema = await buildSchema({
-    resolvers: [
-      RegisterResolver,
-      LoginResolver,
-      MeResolver,
-      ConfirmResolver,
-      ForgotPasswordResolver,
-      ChangePasswordResolver,
-      LogoutResolver
-    ],
-    emitSchemaFile: true,
-    validate: false,
-    authChecker: ({ context: { req } }) => {
-      return !!req.session.userId;
-    },
-  });
+  const schema = await createSchema()
 
   // create mongoose connection
-  const mongoose = await connect("mongodb://localhost:27017/typescript", {
+  // const mongoose = await connect("mongodb://localhost:27017/typescript", {
+  //   useNewUrlParser: true,
+  //   useFindAndModify: true,
+  //   useUnifiedTopology: true,
+  //   useCreateIndex: true,
+  // });
+  // await mongoose.connection;
+
+  await connect("mongodb://localhost:27017/typescript", {
     useNewUrlParser: true,
     useFindAndModify: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-  });
-  await mongoose.connection;
+  }).then(()=> console.log("Connected to db"));
 
   const server = new ApolloServer({
     schema,

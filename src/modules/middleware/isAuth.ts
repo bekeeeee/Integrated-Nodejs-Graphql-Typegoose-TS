@@ -1,4 +1,4 @@
-import { MyContext } from "Mycontext";
+import { MyContext } from "../../types/Mycontext";
 import { MiddlewareFn } from "type-graphql";
 
 export const isAuth:MiddlewareFn<MyContext> =async({context:{req}},next)=>{
