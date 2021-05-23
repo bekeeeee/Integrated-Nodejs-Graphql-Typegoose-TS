@@ -28,6 +28,7 @@ export class RegisterResolver {
         password,
       })
     ).save();
+
     // console.log("user", (await user).firstName)
     await sendEmail(
       email.toString(),
