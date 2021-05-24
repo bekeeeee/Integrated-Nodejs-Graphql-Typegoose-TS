@@ -21,14 +21,15 @@ input LoginInput {
 }
 
 type Mutation {
-  createProduct(data: ProductInput!): Product!
-  createUser(data: CreateUserInput!): User!
   register(data: RegisterInput!): User!
   login(data: LoginInput!): User
   logout: Boolean!
   ConfirmUser(token: String!): Boolean!
   forgotPassword(email: String!): Boolean!
   ChangePassword(data: ChangePasswordInput!): User
+  createUser(data: CreateUserInput!): User!
+  createProduct(data: ProductInput!): Product!
+  addProfilePicture(picture: Upload!): Boolean!
 }
 
 """The Product model"""
@@ -52,6 +53,9 @@ input RegisterInput {
   email: String!
   password: String!
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 """The User model"""
 type User {

@@ -45,6 +45,7 @@ class ProductInput implements Partial<Product> {
   @Field()
   @Length(1, 255)
   name: String;
+  
 }
 export const CreateProductResolver = createResolver(
   "Product",
