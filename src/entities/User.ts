@@ -9,11 +9,11 @@ import * as bcrypt from "bcryptjs";
 */
 @ObjectType({ description: "The User model" })
 @pre<User>("save", async function (next) {
-  console.log("hereeeeeeeeeeeee password");
+  // console.log("hereeeeeeeeeeeee password");
   // Only run this function if password was actually modified
   if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password.toString(), 12);
-  console.log(this.password);
+  // console.log(this.password);
   next();
 })
 @pre<User>("save", async function (next) {
@@ -31,19 +31,19 @@ export class User {
   id: number;
 
   @Field(() => String)
-  @Property({ required: [true, "Please Provide a password"] })
+  @Property({ required: [true, "Please Provide a firstName"] })
   firstName: String;
 
   @Field(() => String)
-  @Property({ required: true })
+  @Property({ required: [true, "Please Provide a lastName"] })
   lastName: String;
 
   @Field(() => String)
-  @Property({ required: true, unique: true })
+  @Property({ required: [true, "Please Provide a email"], unique: true })
   email: String;
 
   @Field(() => String)
-  @Property({ required: true, select: false })
+  @Property({ required: [true, "Please Provide a password"], select: false })
   password: String;
 
   @Field(() => String)

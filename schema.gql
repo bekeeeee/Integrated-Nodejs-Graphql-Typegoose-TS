@@ -8,18 +8,37 @@ input ChangePasswordInput {
   password: String!
 }
 
+input CreateUserInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+}
+
 input LoginInput {
   email: String!
   password: String!
 }
 
 type Mutation {
+  createProduct(data: ProductInput!): Product!
+  createUser(data: CreateUserInput!): User!
   register(data: RegisterInput!): User!
-  Login(data: LoginInput!): User
+  login(data: LoginInput!): User
   logout: Boolean!
   ConfirmUser(token: String!): Boolean!
   forgotPassword(email: String!): Boolean!
   ChangePassword(data: ChangePasswordInput!): User
+}
+
+"""The Product model"""
+type Product {
+  id: ID!
+  name: String!
+}
+
+input ProductInput {
+  name: String!
 }
 
 type Query {

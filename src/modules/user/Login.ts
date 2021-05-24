@@ -15,7 +15,7 @@ import { MyContext } from "../../types/Mycontext";
 export class LoginResolver {
   //async deleteProduct(@Arg("id") id: string)
   @Mutation(() => User, { nullable: true })
-  async Login(
+  async login(
     @Arg("data")
     { email, password }: LoginInput,
     @Ctx() ctx: MyContext

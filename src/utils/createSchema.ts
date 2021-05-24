@@ -7,6 +7,8 @@ import { LogoutResolver } from "../modules/User/Logout";
 import { ConfirmResolver } from "../modules/User/Confirm";
 import { ForgotPasswordResolver } from "../modules/user/ForgotPassword";
 import { ChangePasswordResolver } from "../modules/user/ChangePassword";
+import { CreateProductResolver,CreateUserResolver } from "../modules/user/CreateUser";
+
 
 import { MeResolver } from "../modules/User/Me"
 export const createSchema =() =>
@@ -18,7 +20,9 @@ export const createSchema =() =>
           ConfirmResolver,
           ForgotPasswordResolver,
           ChangePasswordResolver,
-          LogoutResolver
+          LogoutResolver,
+          CreateUserResolver,
+          CreateProductResolver
         ],
         emitSchemaFile: true,
         validate: false,
